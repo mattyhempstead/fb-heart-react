@@ -5,19 +5,25 @@
   let oldOpen = XMLHttpRequest.prototype.open
 
   let selectedHeart = false
-  let isHeartCurrentReaction = false   // Whether not the current message reaction is already a heart
+  let isHeartCurrentReaction = false    // Whether or not the heart react is already the current reaction
 
 
   XMLHttpRequest.prototype.open = function(method, url, async=true, user=null, password=null) {
     
-    if (method === 'POST') console.log(url)
+    // if (method === 'POST') console.log(selectedHeart, isHeartCurrentReaction, decodeURI(url))
 
-    // if ()
-
-
+    // Only modify requests which are heart eyes reactions
     if (selectedHeart && method === 'POST' && url.startsWith('/webgraphql/mutation/') && url.indexOf('reaction') !== -1) {
-      console.log('detected heart react')
+      selectedHeart = false
       url = url.replace(encodeURI('😍'), encodeURI('❤'))
+
+      if (isHeartCurrentReaction) {
+        // If heart react is selected while it is already the current reaction, user wants to remove it
+        // url = url.replace('ADD_REACTION', 'REMOVE_REACTION')
+      } else {
+        // If heart react is selected while heart eyes is already the current reaction, user wants to switch reaction
+        url = url.replace('REMOVE_REACTION', 'ADD_REACTION')
+      }
     }
     oldOpen.call(this, method, url, async, user, password)
   }
@@ -29,22 +35,13 @@
    * @param {HTMLElement} heartEyesReactElement 
    */
   function addHeartReaction(heartEyesReactElement) {
-    selectedHeart = false
-    isRemoving = reactsContainer.children.filter(reactEl => reactEl.getAttribute('aria-selected') === 'false')
-
-
     const reactsContainer = heartEyesReactElement.parentElement
 
-    console.log('reacts container')
-    console.log(reactsContainer)
-    for (let i of Array.from(reactsContainer.children)) {
-      console.log(i)
-    }
-    console.log(' ')
+    // This has a false positive when there are no reactions on a message at all
+    // I need to figure out a way to tell the difference between no reactions on a message, and a custom heart reaction
+    isHeartCurrentReaction = Array.from(reactsContainer.children).filter(el => el.getAttribute('aria-selected') === 'true').length === 0
+    // console.log(isHeartCurrentReaction)
 
-    // _1z8r _5-2b _5f0v
-
-    // console.log(heartEyesReactElement)
 
     // Only add heart reaction element if it does not already exist
     if (reactsContainer.children.length === 7) {
@@ -54,41 +51,28 @@
 
       heartReactElement.setAttribute('id', '❤')
       heartReactElement.setAttribute('aria-label', '❤')
-      // heartReactElement.setAttribute('aria-selected', false)
+      heartReactElement.setAttribute('aria-selected', false)
 
       // Give heart react element the default style
-      heartReactElement.setAttribute('class', heartEyesReactElement.className.split(' ')[0])
-
-      console.log(heartReactElement)
-      
+      heartReactElement.setAttribute('class', heartEyesReactElement.className.split(' ')[0])      
 
       // Set the elements <img> to use heart react
       const heartReactImg = heartReactElement.getElementsByTagName('img')[0]
       heartReactImg.setAttribute('alt', '❤')
       heartReactImg.setAttribute('src', 'https://static.xx.fbcdn.net/images/emoji.php/v9/t92/1/128/2764.png')      
 
-
+      // When user clicks heart react, simulate a click on heart eyes and modify the request
       heartReactElement.addEventListener('click', ()=> {
         selectedHeart = true
-
-        console.log(isRemoving)
-
         heartEyesReactElement.click()
       })
-
 
       reactsContainer.appendChild(heartReactElement)
 
     }
-    
 
   }
 
-
-
-  
-
-  
 
   // Create an observer instance linked to the callback function
   const observer = new MutationObserver((mutationsList, observer) => {
@@ -98,11 +82,7 @@
         const heartEyesReactElement = document.getElementById('😍')
         if (heartEyesReactElement !== null) {
           addHeartReaction(heartEyesReactElement)
-        } // else {
-          // Remove XMLHttpRequest.prototype.open wrapper while it is not needed
-          // console.log('removing heart react and using default XMLHttpRequest.prototype.open')
-          // XMLHttpRequest.prototype.open = oldOpen          
-        // }
+        }
 
       }
     }
@@ -111,8 +91,5 @@
   // Start observing container which holds the reaction popup
   const globalContainer = document.getElementById('globalContainer')
   observer.observe(globalContainer, { childList: true })
-
-  // Later, you can stop observing
-  // observer.disconnect();
   
 })()
