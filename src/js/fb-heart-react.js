@@ -23,6 +23,7 @@
       } else {
         // If heart react is selected while heart eyes is already the current reaction, user wants to switch reaction
         url = url.replace('REMOVE_REACTION', 'ADD_REACTION')
+        console.log('reacting with heart')
       }
     }
     oldOpen.call(this, method, url, async, user, password)
@@ -45,8 +46,6 @@
 
     // Only add heart reaction element if it does not already exist
     if (reactsContainer.children.length === 7) {
-      console.log('adding heart react element')
-
       const heartReactElement = heartEyesReactElement.cloneNode([true])
 
       heartReactElement.setAttribute('id', '❤')
