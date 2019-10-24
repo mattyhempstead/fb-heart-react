@@ -1,20 +1,27 @@
+/*
+  This script will enable heart reacts in facebook messenger
+
+  Occasionally facebook seems to reset XMLHttpRequest.prototype.open back to the original built-in method
+  For this reason I am only adding the .open wrapper directly before a reaction request, and removing it directly after.
+*/
 
 (()=>{
   console.log('Running fb-heart-react.js')
   
-  let oldOpen = XMLHttpRequest.prototype.open
+  // Store the default XMLHttpRequest.prototype.open which can be switched back and forth
+  let defaultXMLHttpRequestOpen = XMLHttpRequest.prototype.open
 
-  let selectedHeart = false
   let isHeartCurrentReaction = false    // Whether or not the heart react is already the current reaction
 
-
-  XMLHttpRequest.prototype.open = function(method, url, async=true, user=null, password=null) {
-    
-    // if (method === 'POST') console.log(selectedHeart, isHeartCurrentReaction, decodeURI(url))
+  /**
+   * A custom function which replaces the next instance of heart eyes in a reaction with heart react
+   */
+  const replaceHeartFunction = function(method, url, async=true, user=null, password=null) {    
+    // Reset back to the original function so this wrapper is only used temporarily
+    XMLHttpRequest.prototype.open = defaultXMLHttpRequestOpen
 
     // Only modify requests which are heart eyes reactions
-    if (selectedHeart && method === 'POST' && url.startsWith('/webgraphql/mutation/') && url.indexOf('reaction') !== -1) {
-      selectedHeart = false
+    if (method === 'POST' && url.startsWith('/webgraphql/mutation/') && url.indexOf('reaction') !== -1) {
       url = url.replace(encodeURI('😍'), encodeURI('❤'))
 
       if (isHeartCurrentReaction) {
@@ -26,7 +33,9 @@
         console.log('reacting with heart')
       }
     }
-    oldOpen.call(this, method, url, async, user, password)
+
+    // Execute the original XMLHttpRequest.prototype.open with "this" (the particular XMLHttpRequest instance) as the context
+    defaultXMLHttpRequestOpen.call(this, method, url, async, user, password)
   }
 
 
@@ -62,7 +71,9 @@
 
       // When user clicks heart react, simulate a click on heart eyes and modify the request
       heartReactElement.addEventListener('click', ()=> {
-        selectedHeart = true
+        // Temporarily add a wrapper over the default XMLHttpRequest.open method
+        // This wrapper will replace any attempt to react with heart eyes with heart react
+        XMLHttpRequest.prototype.open = replaceHeartFunction
         heartEyesReactElement.click()
       })
 
