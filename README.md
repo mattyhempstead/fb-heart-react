@@ -9,8 +9,8 @@ However, this extension unlocks the heart reaction capabilities for all users.
 ❤❤❤❤❤❤❤❤❤❤
 
 Facebook Heart Reaction is currently available on:  
-❤ messenger.com ❤  
-❤ www.facebook.com/messages ❤  
+❤ [messenger.com](https://messenger.com) ❤  
+❤ [www.facebook.com/messages](https://www.facebook.com/messages/) ❤  
 
 ❤❤❤❤❤❤❤❤❤❤
 
