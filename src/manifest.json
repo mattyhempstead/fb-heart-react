@@ -1,13 +1,15 @@
 {
     "name": "Facebook Heart Reacts",
     "description": "Adds the heart reaction to facebook messages",
-    "version": "1.0.2",
+    "version": "1.1.0",
     "manifest_version": 2,
     "content_scripts": [
         {
             "matches": [
                 "https://www.facebook.com/messages/*",
-                "http://www.facebook.com/messages/*"
+                "http://www.facebook.com/messages/*",
+                "https://www.messenger.com/*",
+                "http://www.messenger.com/*"
             ],
             "js": [
                 "js/inject-script.js"

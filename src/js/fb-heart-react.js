@@ -98,8 +98,13 @@
     }
   })
 
-  // Start observing container which holds the reaction popup
-  const globalContainer = document.getElementById('globalContainer')
-  observer.observe(globalContainer, { childList: true })
+  // Start container which holds the reaction popup
+  let popupContainer
+  if (location.host === 'www.messenger.com') {
+    popupContainer = document.body
+  } else if (location.host === 'www.facebook.com') {
+    popupContainer = document.getElementById('globalContainer')
+  }
+  observer.observe(popupContainer, { childList: true })
   
 })()
