@@ -1,7 +1,7 @@
 {
-    "name": "Facebook Heart React",
+    "name": "Heart React for Messenger",
     "description": "Adds the ❤❤ heart ❤❤ reaction to Facebook Messenger reactions",
-    "version": "1.3.0",
+    "version": "1.3.1",
     "manifest_version": 2,
     "icons": {
         "16": "icons/icon16.png",
