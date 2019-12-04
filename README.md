@@ -9,8 +9,8 @@ However, this extension unlocks the heart reaction capabilities for all users.
 ❤❤❤❤❤❤❤❤❤❤
 
 Heart React for Messenger is currently available on:  
-❤ [messenger.com](https://messenger.com) ❤
-❤ [www.facebook.com](https://facebook.com) ❤
+❤ [messenger.com](https://messenger.com) ❤  
+❤ [www.facebook.com](https://facebook.com) ❤  
 ❤ [www.facebook.com/messages](https://www.facebook.com/messages/) ❤  
 
 ❤❤❤❤❤❤❤❤❤❤
