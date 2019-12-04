@@ -88,6 +88,7 @@
   const observer = new MutationObserver((mutationsList, observer) => {
     for(let mutation of mutationsList) {
       if (mutation.type === 'childList') {
+        console.log('mutation', mutation)
 
         const heartEyesReactElement = document.getElementById('😍')
         if (heartEyesReactElement !== null) {
@@ -98,13 +99,31 @@
     }
   })
 
+
   // Start container which holds the reaction popup
-  let popupContainer
   if (location.host === 'www.messenger.com') {
-    popupContainer = document.body
-  } else if (location.host === 'www.facebook.com') {
-    popupContainer = document.getElementById('globalContainer')
+
+    observer.observe(document.body, { childList: true })
+
+  } else if (location.host === 'www.facebook.com' && location.pathname.startsWith('/messages/t/')) {
+
+    observer.observe(document.getElementById('globalContainer'), { childList: true })
+
+  } else if (location.host === 'www.facebook.com' && location.pathname === '/') {
+
+    // Listen for reaction selection element to be added to any of the dock chats
+    document.getElementById('ChatTabsPagelet').addEventListener('DOMNodeInserted', evt => {
+      // Filter many elements which are definitely not the reaction selection (for efficiency purposes)
+      if (!evt.target.classList.contains('uiContextualLayerPositioner')) return
+     
+      // Add heart reaction if reaction selection element was created
+      const heartEyesReactElement = document.getElementById('😍')
+      if (heartEyesReactElement !== null) {
+         addHeartReaction(heartEyesReactElement)
+      } 
+
+    })
+
   }
-  observer.observe(popupContainer, { childList: true })
   
 })()
