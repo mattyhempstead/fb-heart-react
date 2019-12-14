@@ -6,7 +6,7 @@
 */
 
 (()=>{
-  console.log('Running fb-heart-react.js')
+  console.log('Heart React for Messenger')
   
   // Store the default XMLHttpRequest.prototype.open which can be switched back and forth
   let defaultXMLHttpRequestOpen = XMLHttpRequest.prototype.open
@@ -88,13 +88,10 @@
   const observer = new MutationObserver((mutationsList, observer) => {
     for(let mutation of mutationsList) {
       if (mutation.type === 'childList') {
-        console.log('mutation', mutation)
-
         const heartEyesReactElement = document.getElementById('😍')
         if (heartEyesReactElement !== null) {
           addHeartReaction(heartEyesReactElement)
         }
-
       }
     }
   })
