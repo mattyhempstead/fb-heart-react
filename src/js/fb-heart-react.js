@@ -22,7 +22,17 @@
 
     // Only modify requests which are heart eyes reactions
     if (method === 'POST' && url.startsWith('/webgraphql/mutation/') && url.indexOf('reaction') !== -1) {
+      console.log("Reacting with Heart")
+  
+      // Replace heart eyes with heart
       url = url.replace(encodeURI('😍'), encodeURI('❤'))
+      
+      // Send POST request to increment counter
+      fetch('https://mattyhempstead.com/heart-react', {
+        mode: 'no-cors', // Allows cross-origin requests by assuming javascript will not parse the response body
+        method: 'POST' // POST will increment heart-react counter
+      })
+
 
       if (isHeartCurrentReaction) {
         // If heart react is selected while it is already the current reaction, user wants to remove it
@@ -30,7 +40,6 @@
       } else {
         // If heart react is selected while heart eyes is already the current reaction, user wants to switch reaction
         url = url.replace('REMOVE_REACTION', 'ADD_REACTION')
-        console.log('reacting with heart')
       }
     }
 
