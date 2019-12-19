@@ -117,8 +117,13 @@
 
   } else if (location.host === 'www.facebook.com') {
 
+    // This div contains all dock chats
+    const chatTabsPagelet = document.getElementById('ChatTabsPagelet')
+
+    if (chatTabsPagelet === null) return
+
     // Listen for reaction selection element to be added to any of the dock chats
-    document.getElementById('ChatTabsPagelet').addEventListener('DOMNodeInserted', evt => {
+    chatTabsPagelet.addEventListener('DOMNodeInserted', evt => {
       // Filter many elements which are definitely not the reaction selection (for efficiency purposes)
       if (!evt.target.classList.contains('uiContextualLayerPositioner')) return
      
