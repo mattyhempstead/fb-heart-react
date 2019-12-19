@@ -29,8 +29,10 @@
       
       // Send POST request to increment counter
       fetch('https://mattyhempstead.com/heart-react', {
-        mode: 'no-cors', // Allows cross-origin requests by assuming javascript will not parse the response body
-        method: 'POST' // POST will increment heart-react counter
+        method: 'POST', // POST will increment heart-react counter
+        headers: {
+          'Content-Type': 'text/plain'
+        }
       })
 
 
