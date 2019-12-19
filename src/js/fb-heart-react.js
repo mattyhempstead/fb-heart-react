@@ -115,7 +115,7 @@
 
     observer.observe(document.getElementById('globalContainer'), { childList: true })
 
-  } else if (location.host === 'www.facebook.com' && location.pathname === '/') {
+  } else if (location.host === 'www.facebook.com') {
 
     // Listen for reaction selection element to be added to any of the dock chats
     document.getElementById('ChatTabsPagelet').addEventListener('DOMNodeInserted', evt => {
