@@ -27,14 +27,10 @@
       // Replace heart eyes with heart
       url = url.replace(encodeURI('😍'), encodeURI('❤'))
       
-      // Send POST request to increment counter
-      fetch('https://mattyhempstead.com/heart-react', {
-        method: 'POST', // POST will increment heart-react counter
-        headers: {
-          'Content-Type': 'text/plain'
-        }
-      })
-
+      // Dispatch a custom event which to execute code as if it is within the extension sandbox
+      const evt = document.createEvent('Event')
+      evt.initEvent('heart-react', true, false)
+      document.dispatchEvent(evt)
 
       if (isHeartCurrentReaction) {
         // If heart react is selected while it is already the current reaction, user wants to remove it
@@ -140,3 +136,4 @@
   }
   
 })()
+

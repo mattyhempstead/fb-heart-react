@@ -8,3 +8,19 @@
 let injectedScript = document.createElement('script')
 injectedScript.src = chrome.extension.getURL('js/fb-heart-react.js')
 document.body.appendChild(injectedScript)
+
+
+// We must execute this fetch from within the extension sandbox
+// Otherwise the Content Security Policy of facebook will (often?) prevent the request from leaving the browser
+document.addEventListener('heart-react', () => {
+
+  // Send POST request to increment counter
+  fetch('https://mattyhempstead.com/heart-react', {
+    method: 'POST', // POST will increment heart-react counter
+    headers: {
+      'Content-Type': 'text/plain'
+    }
+  })
+
+})
+
