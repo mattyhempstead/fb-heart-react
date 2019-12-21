@@ -1,5 +1,5 @@
 # Heart React for Messenger
-### Adds the ❤❤ heart ❤❤ reaction to Facebook Messenger reactions
+### Adds the ❤ heart ❤ reaction to Facebook Messenger reactions
 
 [Chrome Web Store Listing](https://chrome.google.com/webstore/detail/ohhhckeljnecaiamhlahbpdccchbofgl/publish-accepted?authuser=1&hl=en)
 
