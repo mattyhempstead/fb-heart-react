@@ -7,7 +7,12 @@
 
 (()=>{
   console.log('Heart Eyes for Messenger')
-  
+
+  const reactLocation = 
+    (location.host === 'www.messenger.com') ? 0 : 
+    (location.host === 'www.facebook.com' && location.pathname.startsWith('/messages/t/')) ? 1 :
+    (location.host === 'www.facebook.com') ? 2 : -1
+
   // Store the default XMLHttpRequest.prototype.open which can be switched back and forth
   let defaultXMLHttpRequestOpen = XMLHttpRequest.prototype.open
 
@@ -28,8 +33,9 @@
       url = url.replace(encodeURI('❤'), encodeURI('😍'))
       
       // Dispatch a custom event which to execute code as if it is within the extension sandbox
-      const evt = document.createEvent('Event')
-      evt.initEvent('heart-eyes-react', true, false)
+      // const evt = document.createEvent('Event')
+      // evt.initEvent('heart-eyes-react', true, false)
+      const evt = new CustomEvent('heart-eyes-react', { detail: {reactLocation} })
       document.dispatchEvent(evt)
 
       if (isHeartCurrentReaction) {
@@ -102,15 +108,15 @@
 
 
   // Start container which holds the reaction popup
-  if (location.host === 'www.messenger.com') {
+  if (reactLocation === 0) {
 
     observer.observe(document.body, { childList: true })
 
-  } else if (location.host === 'www.facebook.com' && location.pathname.startsWith('/messages/t/')) {
+  } else if (reactLocation === 1) {
 
     observer.observe(document.getElementById('globalContainer'), { childList: true })
 
-  } else if (location.host === 'www.facebook.com') {
+  } else if (reactLocation === 2) {
 
     // This div contains all dock chats
     const chatTabsPagelet = document.getElementById('ChatTabsPagelet')

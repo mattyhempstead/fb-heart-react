@@ -12,14 +12,18 @@ document.body.appendChild(injectedScript);
 
 // We must execute this fetch from within the extension sandbox
 // Otherwise the Content Security Policy of facebook will (often?) prevent the request from leaving the browser
-document.addEventListener('heart-eyes-react', () => {
+document.addEventListener('heart-eyes-react', (event) => {
 
   // Send POST request to increment counter
-  fetch('https://heart-eyes.mattyhempstead.com', {
+  fetch('https://us-central1-mattyhempstead.cloudfunctions.net/addHeartEyesReact', {
     method: 'POST', // POST will increment heart-react counter
+    mode: 'no-cors',
     headers: {
       'Content-Type': 'text/plain'
-    }
+    },
+    body: JSON.stringify({
+      reactLocation: event.detail.reactLocation
+    })
   });
 
 });
