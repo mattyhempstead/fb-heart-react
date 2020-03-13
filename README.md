@@ -1,16 +1,19 @@
-# Heart React for Messenger
-### Adds the ❤ heart ❤ reaction to Facebook Messenger reactions
+# Heart Eyes for Messenger
+### Adds the 😍 heart eyes 😍 reaction to Facebook Messenger reactions
 
 [Chrome Web Store Listing](https://chrome.google.com/webstore/detail/heart-react-for-messenger/ohhhckeljnecaiamhlahbpdccchbofgl)
 
-Normally the heart react is only visible to a select few individuals.  
-However, this extension unlocks the heart reaction capabilities for all users.  
+Around March 2020, Facebook removed the heart eyes reaction for instant messages and replaced it with the heart react.   
+However, this extension restores heart eyes reaction functionality for all users.  
 
 ❤❤❤❤❤❤❤❤❤❤
 
-Heart React for Messenger is currently available on:  
-❤ [messenger.com](https://messenger.com) ❤  
-❤ [www.facebook.com](https://facebook.com) ❤  
-❤ [www.facebook.com/messages](https://www.facebook.com/messages/) ❤  
+Heart Eyes for Messenger is currently available on:  
+😍 [messenger.com](https://messenger.com) 😍  
+😍 [www.facebook.com](https://facebook.com) 😍  
+😍 [www.facebook.com/messages](https://www.facebook.com/messages/) 😍  
 
 ❤❤❤❤❤❤❤❤❤❤
+
+
+Image credit for the Heart Eyes Emoji goes to [Twemoji](https://twemoji.twitter.com/)
