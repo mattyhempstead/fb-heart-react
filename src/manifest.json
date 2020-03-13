@@ -1,7 +1,7 @@
 {
-    "name": "Heart React for Messenger",
-    "description": "Adds the ❤️ heart ❤️ reaction to Facebook Messenger reactions",
-    "version": "1.6.1",
+    "name": "Heart Eyes for Messenger",
+    "description": "Adds the 😍 heart eyes 😍 reaction to Facebook Messenger",
+    "version": "2.1.1",
     "manifest_version": 2,
     "icons": {
         "16": "icons/icon16.png",
@@ -28,6 +28,6 @@
         }
     ],
     "web_accessible_resources": [
-        "js/fb-heart-react.js"
+        "js/main.js"
     ]
 }

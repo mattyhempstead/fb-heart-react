@@ -1,12 +1,12 @@
 /*
-  This script will enable heart reacts in facebook messenger
+  This script will enable heart eyes in facebook messenger
 
   Occasionally facebook seems to reset XMLHttpRequest.prototype.open back to the original built-in method
   For this reason I am only adding the .open wrapper directly before a reaction request, and removing it directly after.
 */
 
 (()=>{
-  console.log('Heart React for Messenger')
+  console.log('Heart Eyes for Messenger')
   
   // Store the default XMLHttpRequest.prototype.open which can be switched back and forth
   let defaultXMLHttpRequestOpen = XMLHttpRequest.prototype.open
@@ -22,14 +22,14 @@
 
     // Only modify requests which are heart eyes reactions
     if (method === 'POST' && url.startsWith('/webgraphql/mutation/') && url.indexOf('reaction') !== -1) {
-      console.log("Reacting with Heart")
+      console.log("Reacting with Heart Eyes")
   
       // Replace heart eyes with heart
-      url = url.replace(encodeURI('😍'), encodeURI('❤'))
+      url = url.replace(encodeURI('❤'), encodeURI('😍'))
       
       // Dispatch a custom event which to execute code as if it is within the extension sandbox
       const evt = document.createEvent('Event')
-      evt.initEvent('heart-react', true, false)
+      evt.initEvent('heart-eyes-react', true, false)
       document.dispatchEvent(evt)
 
       if (isHeartCurrentReaction) {
@@ -59,13 +59,12 @@
     isHeartCurrentReaction = Array.from(reactsContainer.children).filter(el => el.getAttribute('aria-selected') === 'true').length === 0
     // console.log(isHeartCurrentReaction)
 
-
     // Only add heart reaction element if it does not already exist
     if (reactsContainer.children.length === 7) {
       const heartReactElement = heartEyesReactElement.cloneNode([true])
 
-      heartReactElement.setAttribute('id', '❤')
-      heartReactElement.setAttribute('aria-label', '❤')
+      heartReactElement.setAttribute('id', '😍')
+      heartReactElement.setAttribute('aria-label', '😍')
       heartReactElement.setAttribute('aria-selected', false)
 
       // Give heart react element the default style
@@ -73,8 +72,8 @@
 
       // Set the elements <img> to use heart react
       const heartReactImg = heartReactElement.getElementsByTagName('img')[0]
-      heartReactImg.setAttribute('alt', '❤')
-      heartReactImg.setAttribute('src', 'https://static.xx.fbcdn.net/images/emoji.php/v9/t92/1/128/2764.png')      
+      heartReactImg.setAttribute('alt', '😍')
+      heartReactImg.setAttribute('src', 'https://static.xx.fbcdn.net/images/emoji.php/v9/t9c/1/128/1f60d.png')      
 
       // When user clicks heart react, simulate a click on heart eyes and modify the request
       heartReactElement.addEventListener('click', ()=> {
@@ -84,10 +83,8 @@
         heartEyesReactElement.click()
       })
 
-      reactsContainer.appendChild(heartReactElement)
-
+      heartEyesReactElement.insertAdjacentElement('afterend', heartReactElement)
     }
-
   }
 
 
@@ -95,7 +92,7 @@
   const observer = new MutationObserver((mutationsList, observer) => {
     for(let mutation of mutationsList) {
       if (mutation.type === 'childList') {
-        const heartEyesReactElement = document.getElementById('😍')
+        const heartEyesReactElement = document.getElementById('❤')
         if (heartEyesReactElement !== null) {
           addHeartReaction(heartEyesReactElement)
         }
@@ -126,14 +123,10 @@
       if (!evt.target.classList.contains('uiContextualLayerPositioner')) return
      
       // Add heart reaction if reaction selection element was created
-      const heartEyesReactElement = document.getElementById('😍')
+      const heartEyesReactElement = document.getElementById('❤')
       if (heartEyesReactElement !== null) {
          addHeartReaction(heartEyesReactElement)
       } 
-
     })
-
   }
-  
 })()
-
