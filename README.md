@@ -16,7 +16,7 @@ Heart Eyes for Messenger is currently available on:
 ❤❤❤❤❤❤❤❤❤❤
 
 
-Image credit for the Heart Eyes Emoji goes to [Twemoji](https://twemoji.twitter.com/)  
+Image credit for the Heart Eyes Emoji goes to [Twemoji](https://twemoji.twitter.com/).  
 
 
 Before Heart Eyes was removed, this repo was for a different extension called
