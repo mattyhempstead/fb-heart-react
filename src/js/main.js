@@ -85,8 +85,18 @@
       heartReactElement.addEventListener('click', ()=> {
         // Temporarily add a wrapper over the default XMLHttpRequest.open method
         // This wrapper will replace any attempt to react with heart eyes with heart react
-        XMLHttpRequest.prototype.open = replaceHeartFunction
-        heartEyesReactElement.click()
+        XMLHttpRequest.prototype.open = replaceHeartFunction;
+
+        // Simply .click() no longer triggers a reaction press
+        function triggerMouseEvent (node, eventType) {
+          var clickEvent = document.createEvent ('MouseEvents');
+          clickEvent.initEvent (eventType, true, true);
+          node.dispatchEvent (clickEvent);
+        }
+        triggerMouseEvent(heartEyesReactElement, "mouseover");
+        triggerMouseEvent(heartEyesReactElement, "mousedown");
+        triggerMouseEvent(heartEyesReactElement, "mouseup");
+        triggerMouseEvent(heartEyesReactElement, "click");
       })
 
       heartEyesReactElement.insertAdjacentElement('afterend', heartReactElement)
