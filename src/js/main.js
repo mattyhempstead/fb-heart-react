@@ -65,8 +65,8 @@
     isHeartCurrentReaction = Array.from(reactsContainer.children).filter(el => el.getAttribute('aria-selected') === 'true').length === 0
     // console.log(isHeartCurrentReaction)
 
-    // Only add heart reaction element if it does not already exist
-    if (reactsContainer.children.length === 7) {
+    // Only add heart eyes reaction element if it does not already exist
+    if (reactsContainer.querySelector('#😍') === null) {
       const heartReactElement = heartEyesReactElement.cloneNode([true])
 
       heartReactElement.setAttribute('id', '😍')
